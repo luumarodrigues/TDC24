@@ -5,8 +5,9 @@ import (
 )
 
 func BenchmarkSort(b *testing.B) {
-	arr := []int{64, 34, 25, 12, 22, 11, 90}
+	left := []int{1, 3, 5}
+	right := []int{2, 4, 6}
 	for i := 0; i < b.N; i++ {
-		bubbleSort(arr)
+		merge(left, right)
 	}
 }
