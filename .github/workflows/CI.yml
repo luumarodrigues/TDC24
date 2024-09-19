@@ -51,14 +51,14 @@ jobs:
     - name: Run Go Bench (current branch)
       if: env.prExists == 'true'
       run: |
-        go test -count=10 -cpu 1,2,4 -benchmem -run=^$ -bench ^*$ ./... > bench-current.txt
+        go test -count=10 -benchmem -run=^$ -bench ^*$ ./... > bench-current.txt
 
     - name: Upload benchmark results
       if: env.prExists == 'true'
       uses: actions/upload-artifact@v4
       with:
         name: bench-current
-        path: bench-current.txt
+        path: app/bench-current.txt
  
     - name: Checkout main branch
       if: env.prExists == 'true'
@@ -69,14 +69,14 @@ jobs:
     - name: Run Go Bench (main branch)
       if: env.prExists == 'true'
       run: |
-        go test -count=10 -cpu 1,2,4 -benchmem -run=^$ -bench ^*$ ./... > bench-main.txt
+        go test -count=10 -benchmem -run=^$ -bench ^*$ ./... > bench-main.txt
  
     - name: Upload benchmark results
       if: env.prExists == 'true'
       uses: actions/upload-artifact@v4
       with:
         name: bench-main
-        path: bench-main.txt
+        path: app/bench-main.txt
  
     - uses: actions/checkout@v3
       if: env.prExists == 'true'
@@ -105,7 +105,7 @@ jobs:
     - name: Create PR Comment
       if: env.prExists == 'true'
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       run: |
         if [ -s result.txt ]; then
           COMMENT_BODY=$(echo -e "## Resultados do Benchmark\n\`\`\`" && cat result.txt && echo -e "\`\`\`")
