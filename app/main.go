@@ -9,8 +9,11 @@ func Sort(arr []int) []int {
 	}
 
 	middle := len(arr) / 2
-	left := Sort(arr[:middle])
-	right := Sort(arr[middle:])
+	left := arr[:middle]
+	right := arr[middle:]
+
+	left = Sort(left)
+	right = Sort(right)
 
 	return merge(left, right)
 }
