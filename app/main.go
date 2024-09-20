@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+// Função para ordenar um array de inteiros
 func Sort(arr []int) []int {
 	if len(arr) <= 1 {
 		return arr
@@ -14,7 +15,7 @@ func Sort(arr []int) []int {
 	return merge(left, right)
 }
 
-// metodo que faz o merge sort
+// Função para mesclar dois arrays
 func merge(left, right []int) []int {
 	result := []int{}
 	i, j := 0, 0
@@ -29,7 +30,6 @@ func merge(left, right []int) []int {
 		}
 	}
 
-	// Adiciona os elementos restantes
 	for i < len(left) {
 		result = append(result, left[i])
 		i++

@@ -1,12 +1,13 @@
 package main
 
 import (
+	"math/rand/v2"
 	"testing"
 )
 
 func BenchmarkSort(b *testing.B) {
-	arr := []int{64, 34, 25, 12, 22, 11, 90}
 	for i := 0; i < b.N; i++ {
+		arr := rand.Perm(1000)
 		Sort(arr)
 	}
 }
