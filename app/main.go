@@ -5,10 +5,11 @@ import "fmt"
 // bubbleSort ordena um slice de inteiros
 func Sort(arr []int) []int {
 	n := len(arr)
+	// Percorre o slice comparando o elemento ao lado e trocando de lugar se necessário
 	for i := 0; i < n-1; i++ {
-		for j := 0; j < n-i-1; j++ {
-			if arr[j] > arr[j+1] {
-				arr[j], arr[j+1] = arr[j+1], arr[j]
+		for currentIndex := 0; currentIndex < n-i-1; currentIndex++ {
+			if arr[currentIndex] > arr[currentIndex+1] {
+				arr[currentIndex], arr[currentIndex+1] = arr[currentIndex+1], arr[currentIndex]
 			}
 		}
 	}
