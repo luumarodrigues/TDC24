@@ -51,7 +51,7 @@ jobs:
     - name: Run Go Bench (current branch)
       if: env.prExists == 'true'
       run: |
-        go test -count=10 -cpu= 1,2,4 -benchmem -run=^$ -bench ^*$ ./... > bench-current.txt
+        go test -count=10 -cpu=1,2,4 -benchmem -run=^$ -bench ^*$ ./... > bench-current.txt
 
     - name: Upload benchmark results
       if: env.prExists == 'true'
@@ -69,7 +69,7 @@ jobs:
     - name: Run Go Bench (main branch)
       if: env.prExists == 'true'
       run: |
-        go test -count=10 -cpu= 1,2,4 -benchmem -run=^$ -bench ^*$ ./... > bench-main.txt
+        go test -count=10 -cpu=1,2,4 -benchmem -run=^$ -bench ^*$ ./... > bench-main.txt
  
     - name: Upload benchmark results
       if: env.prExists == 'true'
