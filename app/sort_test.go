@@ -7,7 +7,7 @@ import (
 
 func BenchmarkSort(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		arr := rand.Perm(100)
+		arr := rand.Perm(1000)
 		Sort(arr)
 	}
 }
