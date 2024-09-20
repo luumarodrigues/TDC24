@@ -1,9 +1,7 @@
 # TDC24
 
-Este projeto implementa o algoritmo de ordenação Bubble Sort em Go.
 
-
-## Como Rodar o Projeto
+## Rodar o Projeto
 
 **Execute o programa:**
 
