@@ -109,6 +109,7 @@ jobs:
         echo "Running OpenAI"
         benchresult=$(cat result.txt | jq -Rs .)
         opencomment=$(curl -X POST 'https://webpoc.ashystone-186beaf0.eastus.azurecontainerapps.io/Bench' -H 'accept: text/plain' -H 'Content-Type: application/json' -d "{\"benchresult\": \"$benchresult\"}")
+        echo $opencomment
   
     - name: Create PR Comment
       if: env.prExists == 'true'
@@ -116,7 +117,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       run: |
         if [ -s result.txt ]; then
-          COMMENT_BODY=$(echo -e "## Resultados do Benchmark\n\`\`\`" && cat result.txt && echo -e "\`\`\`\n\n## Análise do resultado \n\`\`\`$opencomment\`\`\`")
+          COMMENT_BODY=$(echo -e "## Resultados do Benchmark\n\`\`\`" && cat result.txt && echo -e "\`\`\`\n\n## Análise do resultado \n\`\`\`echo $opencomment\`\`\`")
           echo "$COMMENT_BODY" | gh pr comment $PR_NUMBER --body-file=-
         else
           echo "result.txt is empty. Skipping comment creation."
