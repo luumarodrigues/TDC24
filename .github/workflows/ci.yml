@@ -118,7 +118,7 @@ jobs:
       run: |
         if [ -s result.txt -a -s opencomment.md ]; then
           COMMENT_BODY=$(echo -e "## Resultados do Benchmark\n\n\`\`\`\n$(cat result.txt)\n\`\`\`\n\n## Análise do resultado\n\n\`\`\`\n$(cat opencomment.md)\n\`\`\`")
-          gh pr comment $PR_NUMBER --body "$COMMENT_BODY"
+          echo "$COMMENT_BODY" | gh pr comment $PR_NUMBER --body -
         else
           echo "result.txt or opencomment.md is empty. Skipping comment creation."
         fi
