@@ -110,7 +110,7 @@ jobs:
         benchresult=$(cat result.txt | jq -Rs .)
         curl -X POST 'https://webpoc.ashystone-186beaf0.eastus.azurecontainerapps.io/Bench' -H 'accept: text/plain' -H 'Content-Type: application/json' -d "{\"benchresult\": $benchresult}" > opencomment.md
         cat opencomment.md
-    
+  
     - name: Create PR Comment
       if: env.prExists == 'true'
       env:
@@ -118,7 +118,7 @@ jobs:
       run: |
         if [ -s result.txt -a -s opencomment.md ]; then
           COMMENT_BODY=$(echo -e "## Resultados do Benchmark\n\`\`\`" && cat result.txt && echo -e "\`\`\`\n\n## Análise do resultado \n\`\`\`" && cat opencomment.md && echo -e "\`\`\`")
-          echo "$COMMENT_BODY" | gh pr comment $PR_NUMBER --body-file=-
+          gh pr comment $PR_NUMBER --body "$COMMENT_BODY"
         else
-          echo "result.txt or opencomment.txt is empty. Skipping comment creation."
+          echo "result.txt or opencomment.md is empty. Skipping comment creation."
         fi
