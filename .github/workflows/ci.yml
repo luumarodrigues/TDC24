@@ -116,7 +116,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       run: |
-        if [ -s result.txt -a -s opencomment.txt ]; then
+        if [ -s result.txt -a -s opencomment.md ]; then
           COMMENT_BODY=$(echo -e "## Resultados do Benchmark\n\`\`\`" && cat result.txt && echo -e "\`\`\`\n\n## Análise do resultado \n\`\`\`" && cat opencomment.md && echo -e "\`\`\`")
           echo "$COMMENT_BODY" | gh pr comment $PR_NUMBER --body-file=-
         else
