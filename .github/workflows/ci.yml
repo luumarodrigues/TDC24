@@ -120,7 +120,7 @@ jobs:
           COMMENT_BODY=$(echo -e "## Resultados do Benchmark\n\n\`\`\`\n$(cat result.txt)\n\`\`\`\n\n## Análise do resultado\n\n\`\`\`\n$(cat opencomment.md)\n\`\`\`")
           echo "$COMMENT_BODY" > comment_body.md
           cat comment_body.md
-          gh pr comment $PR_NUMBER --body-file comment_body.md
+          gh pr comment $PR_NUMBER --body "$(cat comment_body.md)"
         else
           echo "result.txt or opencomment.md is empty. Skipping comment creation."
         fi
