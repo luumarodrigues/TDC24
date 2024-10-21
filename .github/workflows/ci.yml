@@ -110,14 +110,14 @@ jobs:
         benchresult=$(cat result.txt | jq -Rs .)
         curl -X POST 'https://webpoc.ashystone-186beaf0.eastus.azurecontainerapps.io/Bench' -H 'accept: text/plain' -H 'Content-Type: application/json' -d "{\"benchresult\": $benchresult}" > opencomment.md
         cat opencomment.md
-  
+    
     - name: Create PR Comment
       if: env.prExists == 'true'
       env:
         GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       run: |
         if [ -s result.txt -a -s opencomment.md ]; then
-          COMMENT_BODY=$(echo -e "## Resultados do Benchmark\n\`\`\`" && cat result.txt && echo -e "\`\`\`\n\n## Análise do resultado \n\`\`\`" && cat opencomment.md && echo -e "\`\`\`")
+          COMMENT_BODY=$(echo -e "## Resultados do Benchmark\n\n\`\`\`\n$(cat result.txt)\n\`\`\`\n\n## Análise do resultado\n\n\`\`\`\n$(cat opencomment.md)\n\`\`\`")
           gh pr comment $PR_NUMBER --body "$COMMENT_BODY"
         else
           echo "result.txt or opencomment.md is empty. Skipping comment creation."
